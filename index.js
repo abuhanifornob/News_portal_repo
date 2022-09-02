@@ -40,9 +40,13 @@ const loadCataoryAllNews = async(categoryID) => {
 const displayCategoryAllNews = (allNews) => {
     const newsContainer = document.getElementById('newsContainer');
     const categoryItemNumber = document.getElementById('categoryItemNumber');
-    categoryItemNumber.innerHTML = `
-    ${allNews.length} items found for
+
+    categoryItemNumber.value = `
+    ${allNews.length} Items Found.
     `
+
+
+
     console.log(categoryItemNumber);
     newsContainer.innerText = "";
     console.log(allNews);
