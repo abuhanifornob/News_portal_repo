@@ -117,17 +117,58 @@
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="flush-headingOne">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                      Accordion Item #1
+                                            Var, Let, and Const – What's the Difference?
                                     </button>
                                     </h2>
                                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+                                        <div class="accordion-body">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+
+                                                        <th scope="col">var</th>
+                                                        <th scope="col">let</th>
+                                                        <th scope="col">const</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+
+                                                        <td>The scope of a var variable is functional scope.</td>
+                                                        <td>The scope of a let variable is block scope.</td>
+                                                        <td>The scope of a const variable is block scope.</td>
+                                                    </tr>
+                                                    <tr>
+
+                                                        <td>It can be updated and re-declared into the scope.</td>
+                                                        <td>It can be updated but cannot be re-declared into the scope.</td>
+                                                        <td>It cannot be updated or re-declared into the scope.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>It can be declared without initialization.</td>
+                                                        <td>It can be declared without initialization.</td>
+                                                        <td>It cannot be declared without initialization.</td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td>It can be accessed without initialization as its default value is “undefined”.</td>
+                                                        <td>It cannot be accessed without initialization otherwise it will give ‘referenceError’.</td>
+                                                        <td>It cannot be accessed without initialization, as it cannot be declared without initialization.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>hoisting done , with initializing as ‘default’ value</td>
+                                                        <td>Hoisting is done , but not initialized (this is the reason for error when we access the let variable before declaration/initialization</td>
+                                                        <td>Hoisting is done, but not initialized (this is the reason for error when we access the const variable before declaration/initialization</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="flush-headingTwo">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                      Accordion Item #2
+                                            Difference between regular functions and arrow functions
                                     </button>
                                     </h2>
                                     <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
