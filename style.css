@@ -10,3 +10,13 @@ a:hover {
     border-radius: 10px;
     color: grey;
 }
+
+.author-imag {
+    width: 60px;
+    height: 60px;
+}
+
+.news {
+    margin: 20px 0;
+    border-radius: 20px;
+}
