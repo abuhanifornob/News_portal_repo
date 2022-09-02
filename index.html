@@ -6,11 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AKHT News</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- css style link add -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Hello, world!</h1>
+    <header class="container">
+        <nav class="navbar d-flex justify-content-between">
 
+            <div>
+                <a class="navbar-brand" href="#"> <span>AKHT</span> News</a>
+            </div>
+
+            <div class="d-flex justify-content-end ">
+
+                <form class="d-flex gap-lg-3" role="search">
+                    <button class="btn btn-outline-success px-5" type="button">NEWS</button>
+                    <button class="btn btn-outline-success px-5" type="button">BLOG</button>
+                    <img src="hanif.JPG" alt="" style="height: 50px; width: 50px; border-radius: 50%;">
+                </form>
+            </div>
+
+        </nav>
+        <hr>
+
+        <section class="mb-4">
+            <ul id="newsCategory" class="d-flex justify-content-between list-unstyled fw-bolder fs-5">
+
+            </ul>
+        </section>
+
+        <section class="mt-5">
+            <input class="form-control form-control-lg" type="text" placeholder="Number Of Founded Category" aria-label=".form-control-lg example">
+        </section>
+
+    </header>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
