@@ -40,16 +40,14 @@ const loadCataoryAllNews = async(categoryID) => {
 const displayCategoryAllNews = (allNews) => {
     const newsContainer = document.getElementById('newsContainer');
     const categoryItemNumber = document.getElementById('categoryItemNumber');
-
+    // Spinner Loader area................
+    const spinnerID = document.getElementById('spinnerID');
     categoryItemNumber.value = `
     ${allNews.length} Items Found.
     `
-
-
-
     console.log(categoryItemNumber);
     newsContainer.innerText = "";
-    console.log(allNews);
+
     allNews.forEach(news => {
         console.log(news);
         const newsID = document.createElement('div');
@@ -80,7 +78,7 @@ const displayCategoryAllNews = (allNews) => {
                             </div>
                             <div class="col-lg-3 col-sm-6 d-flex justify-content-center align-items-center">
                                 <a href="" style="font-size:30px ;"> <i class="fa-solid fa-eye"></i></a>
-                                <p class=" fw-bolder fs-1 mx-1">${news.rating.number} M</p>
+                                <p class=" fw-bolder fs-1 mx-1">${news.total_view ? news.total_view +"M" :"No Data"}</p>
 
 
                             </div>
@@ -93,7 +91,7 @@ const displayCategoryAllNews = (allNews) => {
 
                             </div>
                             <div class="col-lg-3 col-sm-6 d-flex justify-content-center align-items-center">
-                                <i class="fa-solid fa-arrow-right fs-3 "></i>
+                                <button class="btn btn-primary fw-bolder" onclick="seeDetailsNews('${news._id}')">See Details News</button>
 
                             </div>
                         </div>
@@ -101,10 +99,27 @@ const displayCategoryAllNews = (allNews) => {
 
                     </div>
         `;
-        newsContainer.appendChild(newsID)
+        newsContainer.appendChild(newsID);
+
     })
+
 }
 
+const seeDetailsNews = async(newsDetailsID) => {
+    try {
+        const url = `https://openapi.programming-hero.com/api/news/${newsDetailsID}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        displaySeeDetailsNews(data.data[0]);
+
+    } catch (error) {
+        alert(error);
+    }
+}
+
+const displaySeeDetailsNews = async(seeDetailsNewsID) => {
+    console.log(seeDetailsNewsID);
+}
 
 
 displayCategoryMenu();
