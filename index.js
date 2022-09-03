@@ -31,7 +31,10 @@ const loadCataoryAllNews = async(categoryID) => {
         const url = `https://openapi.programming-hero.com/api/news/category/0${categoryID}`;
         const response = await fetch(url);
         const data = await response.json();
+        console.log(data);
         displayCategoryAllNews(data.data);
+
+
     } catch (error) {
         console.log(error)
     }
@@ -45,11 +48,17 @@ const displayCategoryAllNews = (allNews) => {
     categoryItemNumber.value = `
     ${allNews.length} Items Found.
     `
-    console.log(categoryItemNumber);
     newsContainer.innerText = "";
+    let sortedArray;
+    try {
+        sortedArray = sortData(allNews);
+        // console.log(sortedArray);
+    } catch (error) {
+        console.log(error);
+    }
 
-    allNews.forEach(news => {
-        console.log(news);
+    sortedArray.forEach(news => {
+        //console.log(news);
         const newsID = document.createElement('div');
         newsID.classList.add('row');
         newsID.classList.add('news');
@@ -104,6 +113,7 @@ const displayCategoryAllNews = (allNews) => {
     })
 
 }
+
 
 const seeDetailsNews = async(newsDetailsID) => {
     try {
@@ -167,5 +177,25 @@ const displaySeeDetailsNews = async(seeDetailsNewsID) => {
     newsModalDialog.appendChild(modalContent);
 }
 
+const sortData = (newsArry) => {
+    function compare(a, b) {
+        // Use toUpperCase() to ignore character casing
+        const bandA = (a.total_view ? a.total_view : 0);
+        const bandB = (b.total_view ? b.total_view : 0);
+        // console.log(bandA);
+
+        let comparison = 0;
+        if (bandA < bandB) {
+            comparison = 1;
+        } else if (bandA > bandB) {
+            comparison = -1;
+        }
+        return comparison;
+    }
+
+
+    const afterSort = (newsArry.sort(compare));
+    return afterSort;
+}
 
 displayCategoryMenu();
