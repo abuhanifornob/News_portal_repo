@@ -60,7 +60,7 @@ const displayCategoryAllNews = (allNews) => {
                     </div>
                     <div class="col-lg-9 col-sm-12 p-4 text-start">
                         <div>
-                            <h4>${news.title}</h4>
+                            <h4>${news.title ? news.title : "not Found" }</h4>
                             <p>${news.details.length > 338 ? news.details.slice(0,338)+"...":news.details  }</p>
                         </div>
                         </br></br>
@@ -70,12 +70,12 @@ const displayCategoryAllNews = (allNews) => {
                                     <img class="rounded-circle author-imag" src="${news.author.img}" alt="">
                                 </div>
                                 <div class="ms-2">
-                                    <p class="p-0 m-0 fw-bold">${news.author.name}</p>
-                                    <p class="p-0 m-0 fw-bold">${news.author.published_date}</p>
+                                    <p class="p-0 m-0 fw-bold">${news.author.name ? news.author.name:"Not Found"}</p>
+                                    <p class="p-0 m-0 fw-bold">${news.author.published_date ? news.author.published_date: "Not Found"}</p>
                                 </div>
 
 
-                            </div>
+                        </div>
                             <div class="col-lg-3 col-sm-6 d-flex justify-content-center align-items-center">
                                 <a href="" style="font-size:30px ;"> <i class="fa-solid fa-eye"></i></a>
                                 <p class=" fw-bolder fs-1 mx-1">${news.total_view ? news.total_view +"M" :"No Data"}</p>
@@ -91,7 +91,7 @@ const displayCategoryAllNews = (allNews) => {
 
                             </div>
                             <div class="col-lg-3 col-sm-6 d-flex justify-content-center align-items-center">
-                                <button class="btn btn-primary fw-bolder" onclick="seeDetailsNews('${news._id}')">See Details News</button>
+                                <button class="btn btn-primary fw-bolder" onclick="seeDetailsNews('${news._id}')" data-bs-toggle="modal" data-bs-target="#staticBackdrop">See Details News</button>
 
                             </div>
                         </div>
@@ -118,7 +118,53 @@ const seeDetailsNews = async(newsDetailsID) => {
 }
 
 const displaySeeDetailsNews = async(seeDetailsNewsID) => {
-    console.log(seeDetailsNewsID);
+    const newsModalDialog = document.getElementById('newModalDialog');
+    newsModalDialog.innerText = "";
+    const modalContent = document.createElement('modal-content');
+    modalContent.classList.add('modal-content');
+    modalContent.innerHTML = `
+                
+            <div class="modal-body">
+                 <h5 class="modal-title" id="staticBackdropLabel">${seeDetailsNewsID.title ?seeDetailsNewsID.title : "Not Found" }</h5>
+                  <div class="d-flex align-items-center m3-5 ">
+                     <div class="">
+                         <img class="rounded-circle author-imag" src="${seeDetailsNewsID.author.img?seeDetailsNewsID.author.img: 'Not Found' }" alt="Not Found">
+                     </div>
+                     <div class="ms-2 d-flex align-items-center ">
+                         <p class="p-0 m-0 fw-bold">${seeDetailsNewsID.author.name ? seeDetailsNewsID.author.name: "Not Found" }</p>
+                         <p class="p-0 m-0 fw-bold">${seeDetailsNewsID.author.published_date ? seeDetailsNewsID.author.published_date : "Not Found"}</p>
+                     </div>
+                 </div>
+              
+            
+                 <div class="d-flex justify-content-center align-items-center ">
+                    <img class="w-100" src="${seeDetailsNewsID.image_url ? seeDetailsNewsID.image_url: 'Not Found'}" alt="Not Found">
+                 </div>
+                   <p>${seeDetailsNewsID.details ?seeDetailsNewsID.details:"No Data" }</P>
+                    
+                   
+
+                </div>
+                <div class="modal-footer">
+                <div class="d-flex align-items-center ">
+                <div class="d-flex align-items-center">
+                    <a href="" style="font-size:30px ;"> <i class="fa-solid fa-eye"></i></a>
+                    <p class=" fw-bolder fs-1 mx-1">${seeDetailsNewsID.total_view ? seeDetailsNewsID.total_view +"M" :"No Data"}</p>
+    
+    
+                </div>
+                <div class="d-flex align-items-center">
+                    <i class="fa-solid fa-code-compare fs-4 px-2"></i>
+                    <i class="fa-brands fa-square-facebook fs-4 px-2"></i>
+                    <i class="fa-brands fa-twitter fs-4 px-2"></i>
+                    <i class="fa-solid fa-code-compare fs-4 px-2"></i>
+                </div>
+            </div>
+                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                 </div>
+    `
+    newsModalDialog.appendChild(modalContent);
 }
 
 
