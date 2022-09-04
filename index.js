@@ -1,3 +1,4 @@
+//......................Caetegoris  API Load......................
 const loadNewsCategory = async() => {
     try {
         const response = await fetch('https://openapi.programming-hero.com/api/news/categories');
@@ -10,6 +11,7 @@ const loadNewsCategory = async() => {
 
 }
 
+// ............................Display Catagory Menu Bar............................
 const displayCategoryMenu = async() => {
     const data = await loadNewsCategory();
     const category = data.data.news_category;
@@ -17,8 +19,9 @@ const displayCategoryMenu = async() => {
 
     category.forEach(item => {
         const newCategory = document.createElement('li');
+
         newCategory.innerHTML = `
-        <a onclick="loadCataoryAllNews(${item.category_id})">${item.category_name}</a>
+        <a onclick="loadCataoryAllNews(${item.category_id},'${item.category_name}')">${item.category_name}</a>
         `
         newCategoryContainer.appendChild(newCategory);
 
@@ -26,13 +29,15 @@ const displayCategoryMenu = async() => {
 
 }
 
-const loadCataoryAllNews = async(categoryID) => {
+//  ....................Dynamic API Create For Category ID .....................
+
+const loadCataoryAllNews = async(categoryID, catagory) => {
     try {
         const url = `https://openapi.programming-hero.com/api/news/category/0${categoryID}`;
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
-        displayCategoryAllNews(data.data);
+
+        displayCategoryAllNews(data.data, catagory);
 
 
     } catch (error) {
@@ -40,30 +45,41 @@ const loadCataoryAllNews = async(categoryID) => {
     }
 }
 
-const displayCategoryAllNews = (allNews) => {
+const displayCategoryAllNews = (allNews, catagory) => {
     const newsContainer = document.getElementById('newsContainer');
     const categoryItemNumber = document.getElementById('categoryItemNumber');
     // Spinner Loader area................
     const spinnerID = document.getElementById('spinnerID');
-    categoryItemNumber.value = `
-    ${allNews.length} Items Found.
-    `
-    newsContainer.innerText = "";
-    let sortedArray;
-    try {
-        sortedArray = sortData(allNews);
-        // console.log(sortedArray);
-    } catch (error) {
-        console.log(error);
-    }
 
-    sortedArray.forEach(news => {
-        //console.log(news);
-        const newsID = document.createElement('div');
-        newsID.classList.add('row');
-        newsID.classList.add('news');
-        newsID.classList.add('shadow-lg');
-        newsID.innerHTML = `
+    // ...............................Item Number Count..........................
+    categoryItemNumber.value = `
+    ${allNews.length} items found for category ${catagory}.
+    `
+        //...................Clean The  all Previus All News.........................
+    newsContainer.innerText = "";
+
+    //  ..............................sorted Section..............................
+
+    if (allNews.length == 0) {
+        newsContainer.innerText = "Data Not Found..";
+        return
+    } else {
+        let sortedArray;
+        try {
+            sortedArray = sortData(allNews);
+
+        } catch (error) {
+            console.log(error);
+        }
+
+        sortedArray.forEach(news => {
+
+            const newsID = document.createElement('div');
+            newsID.classList.add('row');
+            newsID.classList.add('news');
+            newsID.classList.add('shadow-lg');
+            // ............All News Show Design ..........................................
+            newsID.innerHTML = `
         <div class="col-lg-3 col-sm-12 px-4">
                         <img class="img-fluid" src="${news.thumbnail_url}" alt="">
                     </div>
@@ -108,13 +124,16 @@ const displayCategoryAllNews = (allNews) => {
 
                     </div>
         `;
-        newsContainer.appendChild(newsID);
+            newsContainer.appendChild(newsID);
 
-    })
+        })
+    }
+
+
 
 }
 
-
+//  ............Dynamic API create For Selecte See Details News.............................
 const seeDetailsNews = async(newsDetailsID) => {
     try {
         const url = `https://openapi.programming-hero.com/api/news/${newsDetailsID}`;
@@ -127,12 +146,14 @@ const seeDetailsNews = async(newsDetailsID) => {
     }
 }
 
+//......................Whine Click Then See Details Senari,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
 const displaySeeDetailsNews = async(seeDetailsNewsID) => {
-    const newsModalDialog = document.getElementById('newModalDialog');
-    newsModalDialog.innerText = "";
-    const modalContent = document.createElement('modal-content');
-    modalContent.classList.add('modal-content');
-    modalContent.innerHTML = `
+        const newsModalDialog = document.getElementById('newModalDialog');
+        newsModalDialog.innerText = "";
+        const modalContent = document.createElement('modal-content');
+        modalContent.classList.add('modal-content');
+        modalContent.innerHTML = `
                 
             <div class="modal-body">
                  <h5 class="modal-title" id="staticBackdropLabel">${seeDetailsNewsID.title ?seeDetailsNewsID.title : "Not Found" }</h5>
@@ -167,27 +188,27 @@ const displaySeeDetailsNews = async(seeDetailsNewsID) => {
                     <i class="fa-solid fa-code-compare fs-4 px-2"></i>
                     <i class="fa-brands fa-square-facebook fs-4 px-2"></i>
                     <i class="fa-brands fa-twitter fs-4 px-2"></i>
-                    <i class="fa-solid fa-code-compare fs-4 px-2"></i>
+                    <i class="fa-brands fa-linkedin  fs-4 px-2"></i>
                 </div>
             </div>
                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
                  </div>
     `
-    newsModalDialog.appendChild(modalContent);
-}
-
+        newsModalDialog.appendChild(modalContent);
+    }
+    //..............................Data Sorting .............................
 const sortData = (newsArry) => {
     function compare(a, b) {
-        // Use toUpperCase() to ignore character casing
-        const bandA = (a.total_view ? a.total_view : 0);
-        const bandB = (b.total_view ? b.total_view : 0);
-        // console.log(bandA);
+
+        const viewA = (a.total_view ? a.total_view : 0);
+        const viewB = (b.total_view ? b.total_view : 0);
+
 
         let comparison = 0;
-        if (bandA < bandB) {
+        if (viewA < viewB) {
             comparison = 1;
-        } else if (bandA > bandB) {
+        } else if (viewA > viewB) {
             comparison = -1;
         }
         return comparison;
