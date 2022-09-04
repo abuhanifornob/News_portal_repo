@@ -26,7 +26,7 @@
                     <button class="btn btn-outline-success px-5" type="button">NEWS</button>
                     <button class="btn btn-outline-success px-5" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">BLOG</button>
 
-                    <img src="hanif.JPG" alt="" style="height: 50px; width: 50px; border-radius: 50%;">
+                    <img src="images/hanif.JPG" alt="" style="height: 50px; width: 50px; border-radius: 50%;">
                 </form>
             </div>
 
@@ -37,16 +37,17 @@
 
             </ul>
         </section>
+
+
+        <section id="itemNumber" class="mt-5">
+            <input id="categoryItemNumber" class="form-control form-control-lg" type="text" placeholder="Number Of Founded Category" aria-label=".form-control-lg example">
+        </section>
         <section id="spinnerID" class="my-5 d-none">
             <div class="text-center">
                 <div class="spinner-border" role="status">
                     <span class="visually-hidden fw-bolder">Loading...</span>
                 </div>
             </div>
-        </section>
-
-        <section id="itemNumber" class="mt-5">
-            <input id="categoryItemNumber" class="form-control form-control-lg" type="text" placeholder="Number Of Founded Category" aria-label=".form-control-lg example">
         </section>
 
 
@@ -56,7 +57,35 @@
         <article class="my-4">
             <div id="newsContainer" class="container text-center">
 
-                <h1>Hello Bangladesh</h1>
+                <h1 class="text-start"><span>Today’s</span>Headlines</h1>
+                <div class="row">
+                    <div class="col-lg-8 col-12">
+                        <img class="img-fluid w-100 rounded-2" src="images/bnp-clash_22.jpg" alt="">
+                        <h1 class="text-start">AL, BNP headed for a face-off</h1>
+                        <p class="text-start"> <i class="fa-solid fa-clock ">6hr ago </i></p>
+
+                    </div>
+                    <div class="col-lg-4 col-12 ">
+                        <div class="mb-2">
+                            <img class="img-fluid w-100 " src="images/pm_cherishes_with_bengal.jpg" alt="">
+                            <div class="d-flex align-items-center gap-2 mt-2"> <i class="fa-solid fa-clock">6hr ago |</i>
+                                <h5> BANGLADESH</h5>
+                            </div>
+
+                            <h1>PM cherishes bangles gifted by tea workers</h1>
+                        </div>
+                        <div class="my-2">
+                            <img class="img-fluid w-100 " src="images/side-news.jpg" alt="">
+                            <div class="d-flex align-items-center gap-2 mt-2"> <i class="fa-solid fa-clock">12hr ago |</i>
+                                <h5>CRIME & JUSTICE</h5>
+                            </div>
+
+                            <h1>Man arrested with over USD 22,000, 75k Saudi riyal at Benapole</h1>
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
         </article>

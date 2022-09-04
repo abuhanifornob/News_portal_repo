@@ -50,6 +50,8 @@ const displayCategoryAllNews = (allNews, catagory) => {
     const categoryItemNumber = document.getElementById('categoryItemNumber');
     // Spinner Loader area................
     const spinnerID = document.getElementById('spinnerID');
+    spinnerID.classList.remove('d-none');
+    console.log(spinnerID);
 
     // ...............................Item Number Count..........................
     categoryItemNumber.value = `
@@ -62,6 +64,8 @@ const displayCategoryAllNews = (allNews, catagory) => {
 
     if (allNews.length == 0) {
         newsContainer.innerText = "Data Not Found..";
+        spinnerID.classList.add('d-none');
+
         return
     } else {
         let sortedArray;
@@ -127,6 +131,8 @@ const displayCategoryAllNews = (allNews, catagory) => {
             newsContainer.appendChild(newsID);
 
         })
+
+        spinnerID.classList.add('d-none');
     }
 
 
